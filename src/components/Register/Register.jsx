@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 const Register = () => {
 
@@ -16,7 +17,7 @@ const Register = () => {
         const photo = e.target.photoUrl.value;
         const password = e.target.password.value;
 
-       
+
         if (!/[A-Z]/.test(password)) {
             toast.error("Password must contain at least one uppercase letter")
             return;

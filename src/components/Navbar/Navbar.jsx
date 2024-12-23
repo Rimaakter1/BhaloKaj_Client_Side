@@ -1,20 +1,36 @@
 import React, { useContext } from 'react';
 import logoImg from '../../assets/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthProvider/AuthProvider';
 import { Tooltip } from 'react-tooltip'
 
 
 const Navbar = () => {
 
-    const { user } = useContext(authContext);
-    console.log(user);
-
+    const { user, logout } = useContext(authContext);
+    const navigate = useNavigate();
+    
     const links = <>
         <li className='px-4'>Home</li>
         <li className='px-4'>All volunteer Need posts</li>
-        <li className='px-4'>My Profile</li>
+        <div className="dropdown" >
+            <li tabIndex={0} role="button" className='px-4'>My Profile</li>
+            <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium">
+                <li>Add Volunteer need Post</li>
+                <li>Manage My Posts</li>
+            </ul>
+        </div>
     </>
+
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                navigate('/');
+            });
+    };
 
     return (
         <div className='w-11/12 md:w-10/12 mx-auto py-2'>
@@ -37,7 +53,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium text-lg">
                             {links}
                         </ul>
                     </div>
@@ -56,7 +72,7 @@ const Navbar = () => {
                                 <img data-tooltip-id="my-tooltip"
                                     data-tooltip-content={user.displayName}
                                     data-tooltip-place="top" className='w-12 rounded-full mr-3' src={user.photoURL} alt="" />
-                                <Link className='btn btn-primary' to="/logout">Logout</Link>
+                                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
                             </>
                         ) : (
                             <>
