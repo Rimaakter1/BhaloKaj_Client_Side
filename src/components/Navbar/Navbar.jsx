@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logoImg from '../../assets/logo.png'
 import { Link } from 'react-router-dom';
+import { authContext } from '../../AuthProvider/AuthProvider';
+import { Tooltip } from 'react-tooltip'
+
 
 const Navbar = () => {
+
+    const { user } = useContext(authContext);
+    console.log(user);
 
     const links = <>
         <li className='px-4'>Home</li>
@@ -43,11 +49,28 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className='btn mr-4'>Login</Link>
-                    <Link to="/register" className='btn'>Register</Link>
+                    {
+
+                        user ? (
+                            <>
+                                <img data-tooltip-id="my-tooltip"
+                                    data-tooltip-content={user.displayName}
+                                    data-tooltip-place="top" className='w-12 rounded-full mr-3' src={user.photoURL} alt="" />
+                                <Link className='btn btn-primary' to="/logout">Logout</Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" className='btn mr-4'>Login</Link>
+                                <Link to="/register" className='btn'>Register</Link>
+                            </>)
+                    }
                 </div>
             </div>
+            <Tooltip id="my-tooltip" />
+
+
         </div>
+
     );
 };
 
