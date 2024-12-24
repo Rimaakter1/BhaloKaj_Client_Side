@@ -155,7 +155,6 @@ const AddVolunteerPost = () => {
                         <DatePicker
                             selected={startDate}
                             onChange={date => setStartDate(date)}
-                            dateFormat="yyyy-MM-dd"
                             className="input input-bordered w-full"
                             required
                         />

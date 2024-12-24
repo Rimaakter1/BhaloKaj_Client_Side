@@ -1,11 +1,10 @@
 import React from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 
 const VolunteerPostDetails = () => {
 
     const { id } = useParams();
     const post = useLoaderData();
-    console.log(id, post);
 
     return (
         <div>
@@ -19,7 +18,9 @@ const VolunteerPostDetails = () => {
                     <h2 className="card-title">New album is released!</h2>
                     <p>Click the button to listen on Spotiwhy app.</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Be a Volunteer</button>
+                        <Link to={`/volunteer-request/${id}`}
+                            state={{ post }}
+                            className="btn btn-primary">Be a Volunteer</Link >
                     </div>
                 </div>
             </div>
