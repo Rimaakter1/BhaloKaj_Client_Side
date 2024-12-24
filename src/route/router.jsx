@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home";
-import Login from "../components/Login/Login";
-import Register from "../components/Register/Register";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import AddVolunteerPost from "../pages/AddVolunteerPost/AddVolunteerPost";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -15,12 +17,16 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
-                path:"login",
-                element:<Login></Login>
+                path: "login",
+                element: <Login></Login>
             },
             {
-                path:"register",
+                path: "register",
                 element: <Register></Register>
+            },
+            {
+                path: "add-volunteer",
+                element: <PrivateRoute> <AddVolunteerPost></AddVolunteerPost></PrivateRoute>
             }
 
 

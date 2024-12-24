@@ -18,8 +18,8 @@ const Navbar = () => {
             <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium">
-                <li>Add Volunteer need Post</li>
-                <li>Manage My Posts</li>
+                <Link to="/add-volunteer">Add Volunteer need Post</Link>
+                <Link>Manage My Posts</Link>
             </ul>
         </div>
     </>
