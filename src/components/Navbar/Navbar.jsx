@@ -11,8 +11,8 @@ const Navbar = () => {
     const navigate = useNavigate();
     
     const links = <>
-        <li className='px-4'>Home</li>
-        <li className='px-4'>All volunteer Need posts</li>
+        <Link to="/" className='px-4'>Home</Link>
+        <Link to="/volunteer-posts" className='px-4'>All volunteer Need posts</Link>
         <div className="dropdown" >
             <li tabIndex={0} role="button" className='px-4'>My Profile</li>
             <ul
