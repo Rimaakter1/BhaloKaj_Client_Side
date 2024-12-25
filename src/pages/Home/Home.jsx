@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import BannerSection from '../../components/BannerSection/BannerSection';
 import AboutUs from '../../components/AboutUs/AboutUs';
+import FAQ from '../../components/FAQ/FAQ';
 
 const Home = () => {
 
@@ -25,6 +26,7 @@ const Home = () => {
             <BannerSection></BannerSection>
             <AboutUs></AboutUs>
             <VolunteerNeedSection posts={posts}></VolunteerNeedSection>
+            <FAQ></FAQ>
 
         </div>
     );
