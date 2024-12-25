@@ -9,7 +9,7 @@ const Navbar = () => {
 
     const { user, logout } = useContext(authContext);
     const navigate = useNavigate();
-    
+
     const links = <>
         <Link to="/" className='px-4'>Home</Link>
         <Link to="/volunteer-posts" className='px-4'>All volunteer Need posts</Link>
@@ -19,7 +19,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium">
                 <Link to="/add-volunteer">Add Volunteer need Post</Link>
-                <Link>Manage My Posts</Link>
+                <Link to="/manage-posts">Manage My Posts</Link>
             </ul>
         </div>
     </>
