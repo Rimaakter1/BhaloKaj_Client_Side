@@ -2,19 +2,27 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { authContext } from "../../AuthProvider/AuthProvider";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const UpdatePosts = () => {
     const { user } = useContext(authContext);
-    const navigate = useNavigate();
-    const [startDate, setStartDate] = useState(new Date());
-    const { post } = useLoaderData();
+    const post = useLoaderData();
     console.log(post);
+    const { id } = useParams();
+    console.log(id);
+    const { _id, thumbnail, title,
+        location,
+        volunteersNeeded,
+        organizer,
+        deadline,
+        category,
+        description,
+    } = post || {};
 
-
+    const [startDate, setStartDate] = useState(deadline);
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -39,21 +47,14 @@ const UpdatePosts = () => {
             deadline,
             category,
             description,
-            thumbnail
         }
-        console.log(formData);
-
         try {
-            await axios.post(`http://localhost:5000/add-volunteer`, formData)
+            await axios.put(
+                `http://localhost:5000/update-post/${_id}`,
+                formData
+            )
             form.reset()
-            navigate('/')
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Your volunteer need post has been successfully submitted.",
-                showConfirmButton: false,
-                timer: 1500
-            });
+            toast.success('Data Updated Successfully!!!')
         } catch (err) {
             console.log(err)
             toast.error(err.message)
@@ -73,6 +74,7 @@ const UpdatePosts = () => {
                         <input
                             type="text"
                             name="thumbnail"
+                            defaultValue={thumbnail}
                             placeholder="Enter thumbnail URL"
                             className="input input-bordered w-full"
                             required
@@ -86,6 +88,7 @@ const UpdatePosts = () => {
                         <input
                             type="text"
                             name="title"
+                            defaultValue={title}
                             placeholder="Enter post title"
                             className="input input-bordered w-full"
                             required
@@ -99,6 +102,7 @@ const UpdatePosts = () => {
                         <textarea
                             name="description"
                             placeholder="Enter description"
+                            defaultValue={description}
                             className="textarea textarea-bordered w-full"
                             required
                         ></textarea>
@@ -110,10 +114,11 @@ const UpdatePosts = () => {
                         </label>
                         <select
                             name="category"
+                            defaultValue={category}
                             className="select select-bordered w-full"
                             required
                         >
-                            <option disabled value="">
+                            <option value="">
                                 Select category
                             </option>
                             <option value="healthcare">Healthcare</option>
@@ -130,6 +135,7 @@ const UpdatePosts = () => {
                         <input
                             type="text"
                             name="location"
+                            defaultValue={location}
                             placeholder="Enter location"
                             className="input input-bordered w-full"
                             required
@@ -143,6 +149,7 @@ const UpdatePosts = () => {
                         <input
                             type="number"
                             name="volunteersNeeded"
+                            defaultValue={volunteersNeeded}
                             placeholder="Enter number of volunteers"
                             className="input input-bordered w-full"
                             required
@@ -167,7 +174,7 @@ const UpdatePosts = () => {
                         </label>
                         <input
                             type="text"
-                            value={user?.displayName}
+                            value={organizer?.name}
                             className="input input-bordered w-full bg-gray-100"
                             readOnly
                         />
@@ -178,14 +185,14 @@ const UpdatePosts = () => {
                         </label>
                         <input
                             type="email"
-                            value={user?.email}
+                            value={organizer?.email}
                             className="input input-bordered w-full bg-gray-100"
                             readOnly
                         />
                     </div>
 
                     <button type="submit" className="btn btn-primary w-full">
-                        Add Post
+                        Update Post
                     </button>
                 </form>
             </div>
