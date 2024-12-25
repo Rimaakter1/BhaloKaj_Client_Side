@@ -14,19 +14,16 @@ const BeAVolunteer = () => {
 
 
 
-    const handleSubmit = async e => {
-        e.preventDefault()
-        const form = e.target
-        // const status = form.status.value
-        const suggestion = form.suggestion.value
-        const postId = post._id
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const suggestion = form.suggestion.value;
+        const postId = post._id;
 
-        // if (user?.email ===email)
-        //     return toast.error('Action not permitted!')
-
-        // if (compareAsc(new Date(), new Date(post.deadline)) === 1)
-        //     return toast.error('Deadline Crossed, Bidding Forbidden!')
-
+        // Check if the number of volunteers needed is less than or equal to 0
+        if (post.volunteersNeeded <= 0) {
+            return alert('No more volunteers needed for this post.');
+        }
 
         const requestData = {
             postId,
@@ -34,21 +31,31 @@ const BeAVolunteer = () => {
             status: 'requested',
             volunteerEmail: user?.email,
             volunteerName: user?.displayName,
-        }
+        };
 
         console.log(requestData);
 
         try {
-            const { data } = await axios.post(
-                `http://localhost:5000/volunteer-request`, requestData)
-            form.reset()
-            toast.success('request Successful!!!')
-            console.log(data)
+            // Make POST request to the backend
+            const { data } = await axios.post(`http://localhost:5000/volunteer-request`, requestData);
+
+            // Reset the form after successful request
+            form.reset();
+
+            // Show success toast
+            toast.success('Request Successful!');
+            console.log(data);
+
         } catch (err) {
-            console.log(err)
-            toast.error(err?.response?.data)
+            console.error(err);
+
+            // If the error has a response, use the error message from the server
+            const errorMessage = err?.response?.data || 'An error occurred. Please try again.';
+
+            // Show error toast
+            toast.error(errorMessage);
         }
-    }
+    };
 
 
     return (

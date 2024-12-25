@@ -23,7 +23,7 @@ const AddVolunteerPost = () => {
         const description = form.description.value;
         const category = form.category.value;
         const location = form.location.value;
-        const volunteersNeeded = form.volunteersNeeded.value;
+        const volunteersNeeded = parseInt(form.volunteersNeeded.value);
         const deadline = startDate;
 
         const formData = {

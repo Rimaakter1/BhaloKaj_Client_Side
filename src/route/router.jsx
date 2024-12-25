@@ -10,6 +10,7 @@ import VolunteerPostDetails from "../pages/VolunteerPostDetails/VolunteerPostDet
 import BeAVolunteer from "../pages/BeAVolunteer/BeAVolunteer";
 import ManageMyPosts from "../pages/ManageMyPosts/ManageMyPosts";
 import UpdatePosts from "../pages/UpdatePosts/UpdatePosts";
+import MyVolunteerRequests from "../pages/MyVolunteerRequests/MyVolunteerRequests";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
                 path: "update-posts/:id",
                 element: <PrivateRoute> <UpdatePosts></UpdatePosts> </PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/volunteer-post/${params.id}`)
+            },
+
+            {
+                path: "volunteer-requests",
+                element: <MyVolunteerRequests></MyVolunteerRequests>
             }
 
 

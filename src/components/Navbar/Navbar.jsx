@@ -20,6 +20,7 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium">
                 <Link to="/add-volunteer">Add Volunteer need Post</Link>
                 <Link to="/manage-posts">Manage My Posts</Link>
+                <Link to="/volunteer-requests">My Volunteer Requests</Link>
             </ul>
         </div>
     </>
