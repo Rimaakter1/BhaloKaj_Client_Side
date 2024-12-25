@@ -58,13 +58,13 @@ const Login = () => {
         <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginImg})` }}>
             <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-gray-500"></div>
 
-            <div className="relative z-10 flex items-center justify-center gap-12 h-full">
-                <div className="w-full  max-w-md p-8 bg-white bg-opacity-80 rounded-lg shadow-md">
-                    <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="relative z-10 flex items-center justify-center  md:gap-12 h-full">
+                <div className="w-full  max-w-md p-2 md:p-6 lg:p-8 dark:bg-black dark:bg-opacity-40 bg-white bg-opacity-80 rounded-lg shadow-md">
+                    <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white md:mb-2 lg:mb-6">Login</h2>
+                    <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4 lg:space-y-6">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text dark:text-white text-black text-lg font-bold">Email</span>
                             </label>
                             <input
                                 type="email"
@@ -76,7 +76,7 @@ const Login = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text dark:text-white text-black text-lg font-bold">Password</span>
                             </label>
                             <input
                                 type="password"
@@ -86,20 +86,18 @@ const Login = () => {
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn hover:bg-orange-900 bg-[#553739] w-full text-white text-lg font-Exo">
+                        <button type="submit" className="btn border-none hover:bg-orange-900 bg-[#553739] w-full text-white text-lg font-Exo mt-4">
                             Login
                         </button>
                     </form>
-
-                    <div className="divider">OR</div>
                     <button
                         onClick={googleLogin}
-                        className="btn btn-outline w-full text-gray-700 hover:bg-primary hover:text-white"
+                        className="btn btn-outline w-full dark:text-white  text-lg font-bold text-gray-700 hover:bg-primary hover:text-white mt-4"
                     >
                         Login with Google
                     </button>
 
-                    <p className="text-sm text-center mt-6">
+                    <p className="text-lg text-center  mt-1 md:mt-4 lg:mt-6 dark:text-white text-blackfont-bold">
                         Don't have an account?{" "}
                         <Link to="/register" className="text-primary font-semibold hover:underline">
                             Register

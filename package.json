@@ -13,13 +13,16 @@
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
     "firebase": "^11.1.0",
+    "motion": "^11.15.0",
     "react": "^18.3.1",
     "react-datepicker": "^7.5.0",
     "react-dom": "^18.3.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.1.0",
     "react-toastify": "^11.0.2",
     "react-tooltip": "^5.28.0",
-    "sweetalert2": "^11.15.3"
+    "sweetalert2": "^11.15.3",
+    "swiper": "^11.1.15"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import VolunteerNeedSection from '../../components/VolunteerNeedSection/VolunteerNeedSection';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
+import BannerSection from '../../components/BannerSection/BannerSection';
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
 
     return (
         <div>
+            <BannerSection></BannerSection>
             <VolunteerNeedSection posts={posts}></VolunteerNeedSection>
         </div>
     );

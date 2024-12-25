@@ -52,14 +52,14 @@ const Register = () => {
 
 
     return (
-        <div className='bg-gray-200'>
-            <div className="flex  w-10/12 mx-auto p-8">
-                <div className="w-1/2  h-screen p-8 bg-white rounded-l-lg shadow-md">
-                    <h2 className="text-2xl font-bold text-center text-gray-700 font-Exo">Registration</h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+        <div className='bg-gray-200 dark:bg-slate-800 p-2'>
+            <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 mx-auto  pt-0 lg:pt-10">
+                <div className="md:w-1/2 w-full lg:h-screen p-8 bg-white dark:bg-opacity-35 rounded-l-lg shadow-md">
+                    <h2 className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200 font-Exo">Registration</h2>
+                    <form onSubmit={handleSubmit} className="lg:space-y-3">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Name</span>
+                                <span className="label-text dark:text-white text-lg font-bold font-Exo">Name</span>
                             </label>
                             <input
                                 type="text"
@@ -71,7 +71,7 @@ const Register = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text dark:text-white text-lg font-bold font-Exo">Email</span>
                             </label>
                             <input
                                 type="email"
@@ -83,7 +83,7 @@ const Register = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Photo URL</span>
+                                <span className="label-text dark:text-white text-lg font-bold font-Exo">Photo URL</span>
                             </label>
                             <input
                                 type="text"
@@ -92,9 +92,9 @@ const Register = () => {
                                 className="input input-bordered w-full"
                             />
                         </div>
-                        <div className="form-control">
+                        <div className="form-control mb-4">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text dark:text-white text-lg font-bold font-Exo">Password</span>
                             </label>
                             <input
                                 type="password"
@@ -104,19 +104,19 @@ const Register = () => {
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn hover:bg-orange-900 bg-[#553739] text-white font-bold font-Exo text-lg w-full">
+                        <button type="submit" className="btn hover:bg-orange-900 border-none bg-[#553739] text-white font-bold font-Exo text-lg w-full">
                             Register
                         </button>
+                        <p className=" text-center  dark:text-white text-lg font-bold">
+                            Already have an account?
+                            <a href="/login" className="text-primary hover:underline">
+                                Login
+                            </a>
+                        </p>
                     </form>
-                    <p className="text-sm text-center mt-4 mb-2">
-                        Already have an account?{" "}
-                        <a href="/login" className="text-primary hover:underline">
-                            Login
-                        </a>
-                    </p>
                 </div>
-                <div className='w-1/2 h-screen'>
-                    <img className='h-screen object-cover w-full rounded-r-lg' src={register} alt="" />
+                <div className='w-full md:w-1/2  lg:h-screen'>
+                    <img className='lg:h-screen object-cover w-full rounded-r-lg' src={register} alt="" />
                 </div>
             </div>
         </div>

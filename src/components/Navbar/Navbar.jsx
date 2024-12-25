@@ -74,7 +74,7 @@ const Navbar = () => {
                                 <img data-tooltip-id="my-tooltip"
                                     data-tooltip-content={user.displayName}
                                     data-tooltip-place="top" className='w-12 rounded-full mr-3' src={user.photoURL} alt="" />
-                                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
+                                <button onClick={handleLogout} className='btn bg-[#553739] text-white font-Exo text-lg font-semibold mr-2 border-none'>Logout</button>
                             </>
                         ) : (
                             <div>
