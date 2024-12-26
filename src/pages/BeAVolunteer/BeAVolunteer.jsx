@@ -51,7 +51,7 @@ const BeAVolunteer = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            navigate('/volunteer-requests');
+            navigate('/manage-posts');
         } catch (err) {
             console.error(err);
             const errorMessage = err?.response?.data || 'An error occurred. Please try again.';

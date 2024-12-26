@@ -3,11 +3,16 @@ import { authContext } from '../../AuthProvider/AuthProvider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaEdit } from 'react-icons/fa';
+import { RiDeleteBin6Fill } from 'react-icons/ri';
+import { ImCancelCircle } from 'react-icons/im';
 
 const ManageMyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
+    const [myRequests, setMyRequests] = useState([]);
     const { user } = useContext(authContext);
 
+    // volunteer need posts
     useEffect(() => {
         axios
             .get(`http://localhost:5000/volunteer-posts/${user.email}`)
@@ -19,9 +24,19 @@ const ManageMyPosts = () => {
             });
     }, [user?.email]);
 
-    console.log(myPosts);
+    // volunteer requests
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/volunteer-request/${user.email}`)
+            .then((response) => {
+                setMyRequests(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching volunteer requests:", error);
+            });
+    }, [user?.email]);
 
-
+    // post delete 
     const handleDelete = async (_id) => {
         const confirmation = await Swal.fire({
             title: "Are you sure?",
@@ -37,88 +52,187 @@ const ManageMyPosts = () => {
             try {
                 const response = await axios.delete(`http://localhost:5000/post/${_id}`);
                 if (response.data.deletedCount) {
-                    await Swal.fire({
-                        title: "Deleted!",
-                        text: "Your post has been deleted.",
-                        icon: "success",
-                    });
-
-                    const remainingPosts = myPosts.filter(
-                        (myPost) => myPost._id !== _id
-                    );
-                    setMyPosts(remainingPosts);
+                    Swal.fire("Deleted!", "Your post has been deleted.", "success");
+                    setMyPosts(myPosts.filter((myPost) => myPost._id !== _id));
                 }
             } catch (error) {
-                console.error("Error deleting post:", error);
-                await Swal.fire({
-                    title: "Error!",
-                    text: "There was an issue deleting your post.",
-                    icon: "error",
-                });
+                Swal.fire("Error!", "There was an issue deleting your post.", "error");
+            }
+        }
+    };
+
+    // request cancel 
+    const handleCancellation = async (_id) => {
+        const confirmation = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, cancel it!",
+        });
+
+        if (confirmation.isConfirmed) {
+            try {
+                const response = await axios.delete(`http://localhost:5000/request/${_id}`);
+                if (response.data.deletedCount) {
+                    Swal.fire("Canceled!", "Your request has been canceled.", "success");
+                    setMyRequests(myRequests.filter((request) => request._id !== _id));
+                }
+            } catch (error) {
+                Swal.fire("Error!", "There was an issue canceling your request.", "error");
             }
         }
     };
 
     return (
-        <div>
-            <div className="overflow-x-auto">
-                <table className="table">
+        <div className="bg-slate-50 dark:bg-gray-900">
+            <div className="w-full md:w-10/12 mx-auto py-6">
+                <div className="text-center">
+                    <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+                        My Volunteer Posts
+                    </h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">
+                        Here are the posts you have created for volunteering opportunities.
+                        Manage them as needed!
+                    </p>
+                </div>
 
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            myPosts.map(post => (
-                                <tr>
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <div className="flex items-center gap-3">
+                {myPosts.length === 0 ? (
+                    <div className="text-center text-gray-600 dark:text-gray-400 font-semibold py-6">
+                        <h2>No volunteer posts available. Create your own!</h2>
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto mt-6">
+                        <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden dark:bg-gray-800">
+                            <thead>
+                                <tr className="bg-gradient-to-r from-gray-400 to-gray-600 text-white text-sm font-medium dark:bg-gray-700">
+                                    <th className="py-3 px-4"></th>
+                                    <th className="py-3 px-4 text-left">Post Title</th>
+                                    <th className="py-3 px-4 text-left">Description</th>
+                                    <th className="py-3 px-4 text-left">Category</th>
+                                    <th className="py-3 px-4 text-left">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {myPosts.map((post) => (
+                                    <tr
+                                        className="text-sm border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                        key={post._id}
+                                    >
+                                        <td className="py-3 px-4">
                                             <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
+                                                <div className="mask h-16 w-16 rounded-full overflow-hidden border-2 border-gray-400 dark:border-gray-600">
                                                     <img
-                                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                                        alt="Avatar Tailwind CSS Component" />
+                                                        src={post.thumbnail}
+                                                        alt={post.title}
+                                                        className="object-cover"
+                                                    />
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div className="font-bold">Hart Hagerty</div>
-                                                <div className="text-sm opacity-50">United States</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        Zemlak, Daniel and Leannon
-                                        <br />
-                                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                                    </td>
-                                    <td>Purple</td>
-                                    <th>
-                                        <Link to={`/update-posts/${post._id}`}>Update</Link>
-                                        <button onClick={() => handleDelete(post._id)}>Delete</button>
-                                    </th>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
+                                        </td>
+                                        <td className="py-3 px-4 font-semibold text-gray-800 dark:text-gray-300">
+                                            {post.title}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                                            {post.description.length > 30
+                                                ? post.description.substring(0, 30) + "..."
+                                                : post.description}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-700 dark:text-gray-300">{post.category}</td>
+                                        <td className="py-6 px-4 flex justify-center gap-3">
+                                            <Link
+                                                to={`/update-posts/${post._id}`}
+                                                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-md transition duration-200 ease-in-out flex items-center gap-2 dark:bg-green-800 dark:hover:bg-green-700"
+                                            >
+                                                <FaEdit />
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(post._id)}
+                                                className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-md transition duration-200 ease-in-out flex items-center gap-2 dark:bg-red-800 dark:hover:bg-red-700"
+                                            >
+                                                <RiDeleteBin6Fill />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
 
-                </table>
+            <div className="w-full md:w-10/12 mx-auto py-6">
+                <div className="text-center">
+                    <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+                        My Volunteer Requests
+                    </h1>
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">
+                        Below are the volunteer requests you have made. Cancel them if
+                        necessary.
+                    </p>
+                </div>
+
+                {myRequests.length === 0 ? (
+                    <div className="text-center text-gray-600 dark:text-gray-400 font-semibold py-6">
+                        <h2>No volunteer requests found. Start by making a new request!</h2>
+                    </div>
+                ) : (
+                    <div className="overflow-x-auto mt-6">
+                        <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden dark:bg-gray-800">
+                            <thead>
+                                <tr className="bg-gradient-to-r from-gray-400 to-gray-600 text-white text-sm font-medium dark:bg-gray-700">
+                                    <th className="py-3 px-4"></th>
+                                    <th className="py-3 px-4 text-left">Post Title</th>
+                                    <th className="py-3 px-4 text-left">Suggestion</th>
+                                    <th className="py-3 px-4 text-left">Category</th>
+                                    <th className="py-3 px-4 text-left">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {myRequests.map((request) => (
+                                    <tr
+                                        className="text-sm border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                        key={request._id}
+                                    >
+                                        <td className="py-3 px-4">
+                                            <div className="avatar">
+                                                <div className="mask h-16 w-16 rounded-full overflow-hidden border-2 border-gray-400 dark:border-gray-600">
+                                                    <img
+                                                        src={request.thumbnail}
+                                                        alt={request.title}
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="py-3 px-4 font-semibold text-gray-800 dark:text-gray-300">
+                                            {request.title}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                                            {request.suggestion.length > 30
+                                                ? request.suggestion.substring(0, 30) + "..."
+                                                : request.suggestion}
+                                        </td>
+                                        <td className="py-3 px-4 text-gray-700 dark:text-gray-300">{request.category}</td>
+                                        <td className="py-6  flex justify-center gap-3">
+                                            <button
+                                                onClick={() => handleCancellation(request._id)}
+                                                className="text-red-600 hover:text-red-700 text-2xl font-semibold py-2 rounded-md transition duration-200 ease-in-out flex items-center gap-2 "
+                                            >
+                                                <ImCancelCircle />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
+
     );
 };
 

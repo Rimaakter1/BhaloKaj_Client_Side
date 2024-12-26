@@ -60,11 +60,6 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/volunteer-post/${params.id}`)
             },
 
-            {
-                path: "volunteer-requests",
-                element: <PrivateRoute> <MyVolunteerRequests></MyVolunteerRequests></PrivateRoute>
-            }
-
 
         ]
     },

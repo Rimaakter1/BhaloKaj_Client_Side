@@ -57,15 +57,7 @@ const Navbar = () => {
                                 Manage My Posts
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                to="/volunteer-requests"
-                                onClick={closeDropdown}
-                                className={({ isActive }) => (isActive ? 'text-red-400 font-bold' : 'dark:text-white')}
-                            >
-                                My Volunteer Requests
-                            </NavLink>
-                        </li>
+
                     </ul>
                 )}
             </div>
