@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { authContext } from "../../AuthProvider/AuthProvider";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -14,7 +13,6 @@ import { Helmet } from "react-helmet";
 
 const AddVolunteerPost = () => {
     const { user } = useContext(authContext);
-    const navigate = useNavigate();
     const [startDate, setStartDate] = useState(new Date());
 
     const handleSubmit = async (e) => {
@@ -45,7 +43,6 @@ const AddVolunteerPost = () => {
         try {
             await axios.post(`https://bhalo-kaj-server.vercel.app/add-volunteer`, formData, { withCredentials: true });
             form.reset();
-            navigate("/manage-posts");
             Swal.fire({
                 position: "center",
                 icon: "success",

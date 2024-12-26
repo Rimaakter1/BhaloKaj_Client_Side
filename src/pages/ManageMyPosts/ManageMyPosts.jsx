@@ -16,26 +16,28 @@ const ManageMyPosts = () => {
 
     // volunteer need posts
     useEffect(() => {
-        axios
-            .get(`https://bhalo-kaj-server.vercel.app/volunteer-posts/${user.email}`, { withCredentials: true })
-            .then((response) => {
-                setMyPosts(response.data);
-            })
-            .catch((error) => {
-                toast.error("Error fetching volunteer posts:", error);
-            });
+        const fetchMyPosts = async () => {
+            const { data } = await axios.get(
+                `https://bhalo-kaj-server.vercel.app/volunteer-posts/${user.email}`,
+                { withCredentials: true }
+            );
+            setMyPosts(data);
+        };
+
+        fetchMyPosts()
     }, [user?.email]);
+
 
     // volunteer requests
     useEffect(() => {
-        axios
-            .get(`https://bhalo-kaj-server.vercel.app/volunteer-request/${user.email}`, { withCredentials: true })
-            .then((response) => {
-                setMyRequests(response.data);
-            })
-            .catch((error) => {
-                toast.error("Error fetching volunteer requests:", error);
-            });
+        const fetchRequests = async () => {
+            const { data } = await axios.get(
+                `https://bhalo-kaj-server.vercel.app/volunteer-request/${user.email}`,
+                { withCredentials: true }
+            );
+            setMyRequests(data);
+        };
+        fetchRequests();
     }, [user?.email]);
 
     // post delete 

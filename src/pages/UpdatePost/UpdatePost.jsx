@@ -35,6 +35,7 @@ const UpdatePosts = () => {
 
     const { thumbnail, description, title, category, deadline, location, volunteersNeeded, organizer } = post || {};
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -139,7 +140,8 @@ const UpdatePosts = () => {
                                 </label>
                                 <select
                                     name="category"
-                                    defaultValue={category}
+                                    value={category}
+                                    onChange={(e) => setPost({ ...post, category: e.target.value })}
                                     className="select select-bordered w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                                     required
                                 >
