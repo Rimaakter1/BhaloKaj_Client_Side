@@ -14,7 +14,7 @@ const VolunteerPostDetails = () => {
     useEffect(() => {
         const getVolunteerPost = async () => {
             try {
-                const data = await axios.get(`http://localhost:5000/volunteer-post/${id}`, { withCredentials: true });
+                const data = await axios.get(`https://bhalo-kaj-server.vercel.app/volunteer-post/${id}`, { withCredentials: true });
                 setPost(data.data);
             } catch (err) {
                 toast.error(err.response?.data || err.message);

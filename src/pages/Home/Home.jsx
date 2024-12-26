@@ -12,7 +12,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const { data } = await axios.get(`http://localhost:5000/volunteer-posts?limit=6&sort=deadline`);
+            const { data } = await axios.get(`https://bhalo-kaj-server.vercel.app/volunteer-posts?limit=6&sort=deadline`);
             setPosts(data);
         };
         fetchPosts();

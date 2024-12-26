@@ -12,7 +12,7 @@ const AllVolunteerPosts = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             const { data } = await axios.get(
-                `http://localhost:5000/volunteer-posts${search ? `?title=${search}` : ""}`
+                `https://bhalo-kaj-server.vercel.app/volunteer-posts${search ? `?title=${search}` : ""}`
             );
             setPosts(data);
         };

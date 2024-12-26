@@ -47,7 +47,7 @@ const BeAVolunteer = () => {
         };
 
         try {
-            const { data } = await axios.post(`http://localhost:5000/volunteer-request`, requestData);
+            const { data } = await axios.post(`https://bhalo-kaj-server.vercel.app/volunteer-request`, requestData);
             form.reset();
             Swal.fire({
                 position: "top-end",

@@ -40,11 +40,10 @@ const AddVolunteerPost = () => {
             deadline,
             category,
             description,
-            thumbnail,
         };
 
         try {
-            await axios.post(`http://localhost:5000/add-volunteer`, formData, { withCredentials: true });
+            await axios.post(`https://bhalo-kaj-server.vercel.app/add-volunteer`, formData, { withCredentials: true });
             form.reset();
             navigate("/manage-posts");
             Swal.fire({

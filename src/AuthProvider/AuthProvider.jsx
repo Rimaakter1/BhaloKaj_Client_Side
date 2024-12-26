@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
             if (currentUser?.email) {
                 setUser(currentUser)
                 const { data } = await axios.post(
-                    'http://localhost:5000/jwt',
+                    'https://bhalo-kaj-server.vercel.app/jwt',
                     {
                         email: currentUser?.email,
                     },
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
             else {
                 setUser(null)
                 const { data } = await axios.get(
-                    'http://localhost:5000/logout',
+                    'https://bhalo-kaj-server.vercel.app/logout',
                     { withCredentials: true }
                 )
 

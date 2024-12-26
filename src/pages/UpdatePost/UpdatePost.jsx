@@ -21,7 +21,7 @@ const UpdatePosts = () => {
     useEffect(() => {
         const getVolunteerPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/volunteer-post/${id}`, { withCredentials: true });
+                const response = await axios.get(`https://bhalo-kaj-server.vercel.app/volunteer-post/${id}`, { withCredentials: true });
                 setPost(response.data);
                 if (response.data.deadline) {
                     setStartDate(new Date(response.data.deadline));
@@ -61,7 +61,7 @@ const UpdatePosts = () => {
         };
 
         try {
-            await axios.put(`http://localhost:5000/update-post/${id}`, formData, { withCredentials: true });
+            await axios.put(`https://bhalo-kaj-server.vercel.app/update-post/${id}`, formData, { withCredentials: true });
             form.reset();
             Swal.fire({
                 position: "center",

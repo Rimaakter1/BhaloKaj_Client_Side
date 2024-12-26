@@ -17,7 +17,7 @@ const ManageMyPosts = () => {
     // volunteer need posts
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/volunteer-posts/${user.email}`, { withCredentials: true })
+            .get(`https://bhalo-kaj-server.vercel.app/volunteer-posts/${user.email}`, { withCredentials: true })
             .then((response) => {
                 setMyPosts(response.data);
             })
@@ -29,7 +29,7 @@ const ManageMyPosts = () => {
     // volunteer requests
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/volunteer-request/${user.email}`, { withCredentials: true })
+            .get(`https://bhalo-kaj-server.vercel.app/volunteer-request/${user.email}`, { withCredentials: true })
             .then((response) => {
                 setMyRequests(response.data);
             })
@@ -52,7 +52,7 @@ const ManageMyPosts = () => {
 
         if (confirmation.isConfirmed) {
             try {
-                const response = await axios.delete(`http://localhost:5000/post/${_id}`);
+                const response = await axios.delete(`https://bhalo-kaj-server.vercel.app/post/${_id}`);
                 if (response.data.deletedCount) {
                     Swal.fire("Deleted!", "Your post has been deleted.", "success");
                     setMyPosts(myPosts.filter((myPost) => myPost._id !== _id));
@@ -77,7 +77,7 @@ const ManageMyPosts = () => {
 
         if (confirmation.isConfirmed) {
             try {
-                const response = await axios.delete(`http://localhost:5000/request/${_id}`);
+                const response = await axios.delete(`https://bhalo-kaj-server.vercel.app/request/${_id}`);
                 if (response.data.deletedCount) {
                     Swal.fire("Canceled!", "Your request has been canceled.", "success");
                     setMyRequests(myRequests.filter((request) => request._id !== _id));
@@ -112,7 +112,7 @@ const ManageMyPosts = () => {
                     <div className="overflow-x-auto mt-6">
                         <table className="min-w-full bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden dark:bg-gray-800">
                             <thead>
-                                <tr className="bg-gradient-to-r from-gray-400 to-gray-600 text-white text-sm font-medium dark:bg-gray-700">
+                                <tr className="bg-gradient-to-r from-gray-400 to-gray-600 text-white font-medium dark:bg-gray-700">
                                     <th className="py-3 px-4"></th>
                                     <th className="py-3 px-4 text-left">Post Title</th>
                                     <th className="py-3 px-4 text-left">Description</th>
@@ -123,7 +123,7 @@ const ManageMyPosts = () => {
                             <tbody>
                                 {myPosts.map((post) => (
                                     <tr
-                                        className="text-sm border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                        className=" border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
                                         key={post._id}
                                     >
                                         <td className="py-3 px-4">
@@ -198,7 +198,7 @@ const ManageMyPosts = () => {
                             <tbody>
                                 {myRequests.map((request) => (
                                     <tr
-                                        className="text-sm border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                        className=" border-b hover:bg-gray-50 bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
                                         key={request._id}
                                     >
                                         <td className="py-3 px-4">

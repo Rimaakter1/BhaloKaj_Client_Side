@@ -22,7 +22,7 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch("http://localhost:5000/volunteer-posts")
+                loader: () => fetch("https://bhalo-kaj-server.vercel.app/volunteer-posts")
             },
             {
                 path: "login",

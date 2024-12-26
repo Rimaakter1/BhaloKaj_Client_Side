@@ -19,7 +19,7 @@ const VolunteerPostCard = ({ post }) => {
                 <h4 className='dark:text-white'>{format(new Date(deadline), 'P')}
                 </h4>
                 <div className="card-actions justify-center mt-5 mx-5">
-                    <Link to={`/volunteer-post/${post._id}`} className="btn bg-[#553739] border-none text-white text-lg font-bold w-full hover:bg-[#955E42]hover:bg-[#955E42]">View Details</Link>
+                    <Link to={`/volunteer-post/${post._id}`} className="btn bg-[#553739] border-none text-white text-lg font-bold w-full hover:bg-[#955E42]">View Details</Link>
                 </div>
             </div>
         </div>

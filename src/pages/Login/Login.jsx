@@ -96,7 +96,7 @@ const Login = () => {
                     </form>
                     <button
                         onClick={googleLogin}
-                        className="btn btn-outline w-full dark:text-white  text-lg font-bold text-gray-700 hover:bg-primary hover:text-white mt-4"
+                        className="btn btn-outline w-full dark:text-white  text-lg font-bold text-gray-700 hover:bg-primary border-none hover:text-white mt-4"
                     >
                         Login with Google
                     </button>

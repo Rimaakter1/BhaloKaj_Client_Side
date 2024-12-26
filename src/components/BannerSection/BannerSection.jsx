@@ -38,7 +38,7 @@ const BannerSection = () => {
                         <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
                             Join Hands for a <span className="text-orange-600">Better Future</span>
                         </h2>
-                        <p className="text-sm md:text-lg lg:text-xl font-Open_Sans mb-6">
+                        <p className=" md:text-lg lg:text-xl font-Open_Sans mb-6">
                             Become a part of our volunteer community and make a lasting impact today.
                         </p>
                         <Link
@@ -57,7 +57,7 @@ const BannerSection = () => {
                         <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
                             Give Time, Change <span className="text-orange-600">Lives</span>
                         </h2>
-                        <p className="text-sm md:text-lg lg:text-xl font-Open_Sans mb-6">
+                        <p className=" md:text-lg lg:text-xl font-Open_Sans mb-6">
                             Your time and dedication can help create a world of positive change.
                         </p>
                         <Link
@@ -76,7 +76,7 @@ const BannerSection = () => {
                         <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
                             Be the Change You <span className="text-orange-600">Want to See</span>
                         </h2>
-                        <p className="text-sm md:text-lg lg:text-xl font-Open_Sans mb-6">
+                        <p className="md:text-lg lg:text-xl font-Open_Sans mb-6">
                             Volunteer with us today and take the first step toward a better tomorrow.
                         </p>
                         <Link
@@ -95,7 +95,7 @@ const BannerSection = () => {
                         <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
                             Volunteer Today, <span className="text-orange-600">Impact Tomorrow</span>
                         </h2>
-                        <p className="text-sm md:text-lg lg:text-xl font-Open_Sans mb-6">
+                        <p className="md:text-lg lg:text-xl font-Open_Sans mb-6">
                             Make a difference by helping others and contributing to meaningful causes.
                         </p>
                         <Link
