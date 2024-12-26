@@ -5,8 +5,6 @@ import { div } from 'motion/react-client';
 
 const VolunteerNeedSection = ({ posts }) => {
 
-    console.log(posts);
-
     return (
         <div className='py-10 md:py-20 lg:py-40 bg-gray-100 dark:bg-slate-800'>
             <div className='w-11/12 md:w-10/12 mx-auto '>

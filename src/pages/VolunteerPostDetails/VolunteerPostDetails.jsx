@@ -1,14 +1,28 @@
-import { format } from 'date-fns';
-import React from 'react';
+import axios from 'axios';
+import { format, isValid } from 'date-fns';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const VolunteerPostDetails = () => {
 
     const { id } = useParams();
-    const post = useLoaderData();
+    const [post, setPost] = useState({});
     const { thumbnail, description, title, category, deadline, location, volunteersNeeded, organizer } = post || {};
 
+    useEffect(() => {
+        const getVolunteerPost = async () => {
+            try {
+                const data = await axios.get(`http://localhost:5000/volunteer-post/${id}`, { withCredentials: true });
+                setPost(data.data);
+            } catch (err) {
+                toast.error(err.response?.data || err.message);
+            }
+        };
+
+        getVolunteerPost();
+    }, [id]);
     return (
         <div className="flex justify-center bg-gray-50 dark:bg-slate-800 py-8 px-4 md:px-6 lg:px-8">
             <Helmet>
@@ -32,7 +46,10 @@ const VolunteerPostDetails = () => {
                                 <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Category:</span> {category}</p>
                                 <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Location:</span> {location}</p>
                                 <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Volunteers Needed:</span> {volunteersNeeded}</p>
-                                <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Deadline:</span> {format(new Date(deadline), 'P')}</p>
+                                <p className='dark:text-white'> <span className='font-bold dark:text-gray-300'>Deadline: </span>
+                                    {deadline && isValid(new Date(deadline))
+                                        ? format(new Date(deadline), 'P')
+                                        : "Deadline not available"}</p>
                                 <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Organizer Name:</span> {organizer?.name}</p>
                                 <p className='dark:text-white'><span className='font-bold dark:text-gray-300'>Organizer Email:</span> {organizer?.email}</p>
                             </div>

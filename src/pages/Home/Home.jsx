@@ -19,8 +19,6 @@ const Home = () => {
     }, []);
 
 
-    console.log(posts);
-
     return (
         <div>
             <Helmet>

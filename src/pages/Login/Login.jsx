@@ -4,7 +4,6 @@ import { authContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import loginImg from '../../assets/authImg.jpg';
-import volunteerImg from '../../assets/Voluntiers.jpg'
 import { Helmet } from 'react-helmet';
 
 const Login = () => {

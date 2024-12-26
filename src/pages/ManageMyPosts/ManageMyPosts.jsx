@@ -7,6 +7,7 @@ import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
 import { Helmet } from 'react-helmet';
+import { toast } from 'react-toastify';
 
 const ManageMyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -16,24 +17,24 @@ const ManageMyPosts = () => {
     // volunteer need posts
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/volunteer-posts/${user.email}`)
+            .get(`http://localhost:5000/volunteer-posts/${user.email}`, { withCredentials: true })
             .then((response) => {
                 setMyPosts(response.data);
             })
             .catch((error) => {
-                console.error("Error fetching volunteer posts:", error);
+                toast.error("Error fetching volunteer posts:", error);
             });
     }, [user?.email]);
 
     // volunteer requests
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/volunteer-request/${user.email}`)
+            .get(`http://localhost:5000/volunteer-request/${user.email}`, { withCredentials: true })
             .then((response) => {
                 setMyRequests(response.data);
             })
             .catch((error) => {
-                console.error("Error fetching volunteer requests:", error);
+                toast.error("Error fetching volunteer requests:", error);
             });
     }, [user?.email]);
 

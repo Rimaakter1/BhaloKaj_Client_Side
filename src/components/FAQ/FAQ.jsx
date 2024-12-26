@@ -1,7 +1,6 @@
 import React from 'react';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 import faq from "../../assets/faq.jpg"
-import { div } from 'motion/react-client';
 
 const FAQ = () => {
     return (

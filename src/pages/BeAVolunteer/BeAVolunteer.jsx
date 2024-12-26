@@ -58,7 +58,6 @@ const BeAVolunteer = () => {
             });
             navigate('/manage-posts');
         } catch (err) {
-            console.error(err);
             const errorMessage = err?.response?.data || 'An error occurred. Please try again.';
             toast.error(errorMessage);
         }

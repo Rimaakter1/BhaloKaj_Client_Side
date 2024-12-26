@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { authContext } from "../../AuthProvider/AuthProvider";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import updateImg from "../../assets/updateImg.jpg";
@@ -14,11 +14,26 @@ import { Helmet } from "react-helmet";
 
 const UpdatePosts = () => {
     const { user } = useContext(authContext);
-    const post = useLoaderData();
     const { id } = useParams();
-    const { _id, thumbnail, title, location, volunteersNeeded, organizer, deadline, category, description } = post || {};
+    const [post, setPost] = useState({});
+    const [startDate, setStartDate] = useState(new Date());
 
-    const [startDate, setStartDate] = useState(deadline);
+    useEffect(() => {
+        const getVolunteerPost = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/volunteer-post/${id}`, { withCredentials: true });
+                setPost(response.data);
+                if (response.data.deadline) {
+                    setStartDate(new Date(response.data.deadline));
+                }
+            } catch (err) {
+                toast.error(err.response?.data || err.message);
+            }
+        };
+        getVolunteerPost();
+    }, [id]);
+
+    const { thumbnail, description, title, category, deadline, location, volunteersNeeded, organizer } = post || {};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,17 +61,16 @@ const UpdatePosts = () => {
         };
 
         try {
-            await axios.put(`http://localhost:5000/update-post/${_id}`, formData);
+            await axios.put(`http://localhost:5000/update-post/${id}`, formData, { withCredentials: true });
             form.reset();
             Swal.fire({
                 position: "center",
                 icon: "success",
                 title: "Post updated successfully",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             });
         } catch (err) {
-            console.log(err);
             toast.error(err.message);
         }
     };
@@ -64,39 +78,22 @@ const UpdatePosts = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 py-8 dark:bg-gray-800">
             <Helmet>
-                <title>BhaloKaj | Update Volunteer Post </title>
+                <title>BhaloKaj | Update Volunteer Post</title>
             </Helmet>
             <div className="lg:w-10/12 mx-auto flex flex-row items-center">
-                <div className="w-1/2  hidden lg:block">
+                <div className="w-1/2 hidden lg:block">
                     <div className="grid grid-cols-2 gap-2">
-                        <img
-                            src={updateImg}
-                            alt="Volunteer Image"
-                            className="h-screen w-full object-cover"
-                        />
-                        <img
-                            src={updateImg2}
-                            alt="Volunteer Image"
-                            className="h-screen w-full object-cover"
-                        />
-                        <img
-                            src={updateImg3}
-                            alt="Volunteer Image"
-                            className="h-screen w-full object-cover"
-                        />
-                        <img
-                            src={updateImg4}
-                            alt="Volunteer Image"
-                            className="h-screen w-full object-cover"
-                        />
+                        <img src={updateImg} alt="Volunteer Image" className="h-screen w-full object-cover" />
+                        <img src={updateImg2} alt="Volunteer Image" className="h-screen w-full object-cover" />
+                        <img src={updateImg3} alt="Volunteer Image" className="h-screen w-full object-cover" />
+                        <img src={updateImg4} alt="Volunteer Image" className="h-screen w-full object-cover" />
                     </div>
                 </div>
-
-
-                <div className="w-full lg:w-1/2  bg-white rounded-r-lg shadow-lg dark:bg-gray-700">
-
+                <div className="w-full lg:w-1/2 bg-white rounded-r-lg shadow-lg dark:bg-gray-700">
                     <div className="w-full p-8">
-                        <h2 className="text-2xl font-bold text-center mb-7 text-gray-800 dark:text-white">Update Volunteer Post</h2>
+                        <h2 className="text-2xl font-bold text-center mb-7 text-gray-800 dark:text-white">
+                            Update Volunteer Post
+                        </h2>
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
@@ -111,7 +108,6 @@ const UpdatePosts = () => {
                                     required
                                 />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Post Title</span>
@@ -125,20 +121,18 @@ const UpdatePosts = () => {
                                     required
                                 />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Description</span>
                                 </label>
                                 <textarea
                                     name="description"
-                                    placeholder="Enter description"
                                     defaultValue={description}
+                                    placeholder="Enter description"
                                     className="textarea textarea-bordered w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                                     required
-                                ></textarea>
+                                />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Category</span>
@@ -156,7 +150,6 @@ const UpdatePosts = () => {
                                     <option value="animal welfare">Animal Welfare</option>
                                 </select>
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Location</span>
@@ -170,7 +163,6 @@ const UpdatePosts = () => {
                                     required
                                 />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Number of Volunteers Needed</span>
@@ -184,7 +176,6 @@ const UpdatePosts = () => {
                                     required
                                 />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Deadline</span>
@@ -196,14 +187,13 @@ const UpdatePosts = () => {
                                     required
                                 />
                             </div>
-
                             <div className="form-control">
                                 <label className="label text-gray-600 dark:text-gray-300">
                                     <span className="label-text dark:text-white">Organizer Name</span>
                                 </label>
                                 <input
                                     type="text"
-                                    value={organizer?.name}
+                                    value={organizer?.name || ""}
                                     className="input input-bordered w-full p-3 rounded-md bg-gray-100 cursor-not-allowed dark:bg-gray-700 dark:text-white"
                                     readOnly
                                 />
@@ -214,22 +204,21 @@ const UpdatePosts = () => {
                                 </label>
                                 <input
                                     type="email"
-                                    value={organizer?.email}
+                                    value={organizer?.email || ""}
                                     className="input input-bordered w-full p-3 rounded-md bg-gray-100 cursor-not-allowed dark:bg-gray-700 dark:text-white"
                                     readOnly
                                 />
                             </div>
-
-                            <button type="submit" className="btn bg-[#553739] border-none hover:bg-[#955E42] w-full py-3 rounded-md text-white transition duration-300">
+                            <button
+                                type="submit"
+                                className="btn bg-[#553739] border-none hover:bg-[#955E42] w-full py-3 rounded-md text-white transition duration-300"
+                            >
                                 Update Post
                             </button>
                         </form>
                     </div>
-
-
                 </div>
             </div>
-
         </div>
     );
 };

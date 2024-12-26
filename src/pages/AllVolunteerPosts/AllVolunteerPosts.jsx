@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 const AllVolunteerPosts = () => {
     const [posts, setPosts] = useState([]);
     const [search, setSearch] = useState('');
-    const [isTableLayout, setIsTableLayout] = useState(false); // State for layout toggle
+    const [isTableLayout, setIsTableLayout] = useState(false);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -108,7 +108,7 @@ const AllVolunteerPosts = () => {
                         </table>
                     </div>
                 ) : (
-                    // Card Layout
+                    // Card
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {posts.length > 0 ? (
                             posts.map((post) => (
