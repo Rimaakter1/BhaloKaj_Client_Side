@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLoaderData, useParams } from 'react-router-dom';
 
 const VolunteerPostDetails = () => {
@@ -10,6 +11,9 @@ const VolunteerPostDetails = () => {
 
     return (
         <div className="flex justify-center bg-gray-50 dark:bg-slate-800 py-8 px-4 md:px-6 lg:px-8">
+            <Helmet>
+                <title>BhaloKaj | Volunteer Details Page </title>
+            </Helmet>
             <div className="w-11/12 lg:w-10/12">
                 <div className="bg-white dark:bg-black dark:bg-opacity-20 rounded-lg shadow-xl overflow-hidden">
                     <div className="lg:flex">

@@ -9,14 +9,15 @@ import AllVolunteerPosts from "../pages/AllVolunteerPosts/AllVolunteerPosts";
 import VolunteerPostDetails from "../pages/VolunteerPostDetails/VolunteerPostDetails";
 import BeAVolunteer from "../pages/BeAVolunteer/BeAVolunteer";
 import ManageMyPosts from "../pages/ManageMyPosts/ManageMyPosts";
-import UpdatePosts from "../pages/UpdatePosts/UpdatePosts";
-import MyVolunteerRequests from "../pages/MyVolunteerRequests/MyVolunteerRequests";
+import UpdatePosts from "../pages/UpdatePost/UpdatePost";
+import Page404 from "../pages/Page404";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
+        errorElement: <Page404></Page404>,
         children: [
             {
                 path: "/",

@@ -10,6 +10,7 @@ import addPostImg1 from "../../assets/addPost-1.webp";
 import addPostImg2 from "../../assets/addPost-2.jpeg";
 import addPostImg3 from "../../assets/addPost-3.jpeg";
 import addPostImg4 from "../../assets/addPost-4.jpeg";
+import { Helmet } from "react-helmet";
 
 const AddVolunteerPost = () => {
     const { user } = useContext(authContext);
@@ -60,6 +61,9 @@ const AddVolunteerPost = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen dark:bg-slate-800 bg-gray-50 py-6 pb-10">
+            <Helmet>
+                <title>BhaloKaj | My Profile | Add Volunteer Post </title>
+            </Helmet>
             <div className="w-11/12 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="grid grid-cols-2 gap-4 w-full">
                     <img

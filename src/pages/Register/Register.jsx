@@ -4,6 +4,7 @@ import { authContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import register from '../../assets/volunteerImg.avif'
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
 
@@ -53,6 +54,9 @@ const Register = () => {
 
     return (
         <div className='bg-gray-200 dark:bg-slate-800 p-2'>
+            <Helmet>
+                <title>BhaloKaj | Registration Page </title>
+            </Helmet>
             <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 mx-auto  pt-0 lg:pt-10">
                 <div className="md:w-1/2 w-full lg:h-screen p-8 bg-white dark:bg-opacity-35 rounded-l-lg shadow-md">
                     <h2 className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200 font-Exo">Registration</h2>

@@ -10,6 +10,7 @@ import updateImg2 from "../../assets/updateImg-2.jpeg";
 import updateImg3 from "../../assets/updateImg-3.jpg";
 import updateImg4 from "../../assets/updateImg-4.jpg";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const UpdatePosts = () => {
     const { user } = useContext(authContext);
@@ -62,6 +63,9 @@ const UpdatePosts = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-50 py-8 dark:bg-gray-800">
+            <Helmet>
+                <title>BhaloKaj | Update Volunteer Post </title>
+            </Helmet>
             <div className="lg:w-10/12 mx-auto flex flex-row items-center">
                 <div className="w-1/2  hidden lg:block">
                     <div className="grid grid-cols-2 gap-2">

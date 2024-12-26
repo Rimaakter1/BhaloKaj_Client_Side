@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
 import { ImCancelCircle } from 'react-icons/im';
+import { Helmet } from 'react-helmet';
 
 const ManageMyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -88,6 +89,9 @@ const ManageMyPosts = () => {
 
     return (
         <div className="bg-slate-50 dark:bg-gray-900">
+            <Helmet>
+                <title>BhaloKaj | My Profile | Manage My Posts </title>
+            </Helmet>
             <div className="w-full md:w-10/12 mx-auto py-6">
                 <div className="text-center">
                     <h1 className="text-3xl font-bold text-gray-800 dark:text-white">

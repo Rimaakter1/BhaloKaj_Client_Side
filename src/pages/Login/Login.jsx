@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import loginImg from '../../assets/authImg.jpg';
 import volunteerImg from '../../assets/Voluntiers.jpg'
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const { handleGoogleLogin, handleLogin } = useContext(authContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const googleLogin = async () => {
         try {
@@ -47,7 +49,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate('/');
+                navigate(location?.state ? location.state : "/");
             })
             .catch(err => {
                 toast.error(err.message);
@@ -56,6 +58,9 @@ const Login = () => {
 
     return (
         <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginImg})` }}>
+            <Helmet>
+                <title>BhaloKaj | Login Page </title>
+            </Helmet>
             <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-gray-500"></div>
 
             <div className="relative z-10 flex items-center justify-center  md:gap-12 h-full">

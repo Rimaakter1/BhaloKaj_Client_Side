@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import bgImg from "../../assets/pexels-shvetsa-5029855.jpg";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const BeAVolunteer = () => {
     const { user } = useContext(authContext);
@@ -24,6 +25,10 @@ const BeAVolunteer = () => {
         if (post.volunteersNeeded <= 0) {
             return toast.warning('No more volunteers needed for this post.');
         }
+        if (user?.email === organizer?.email)
+            return toast.error('Action not permitted!');
+
+
 
         const requestData = {
             thumbnail,
@@ -61,6 +66,10 @@ const BeAVolunteer = () => {
 
     return (
         <div className="min-h-screen bg-cover bg-center relative" style={{ backgroundImage: `url(${bgImg})` }}>
+            <Helmet>
+                <title>BhaloKaj | Be A Volunteer Page </title>
+            </Helmet>
+
             <div className="absolute inset-0 bg-black opacity-60"></div>
             <div className="py-10 relative z-10">
                 <div className="max-w-3xl mx-auto p-8 dark:bg-black dark:bg-opacity-25 bg-white bg-opacity-60 shadow-lg rounded-lg">
