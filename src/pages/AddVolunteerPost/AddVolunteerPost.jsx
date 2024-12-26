@@ -59,7 +59,7 @@ const AddVolunteerPost = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen dark:bg-slate-800 bg-gray-100 py-6">
+        <div className="flex items-center justify-center min-h-screen dark:bg-slate-800 bg-gray-50 py-6 pb-10">
             <div className="w-11/12 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="grid grid-cols-2 gap-4 w-full">
                     <img

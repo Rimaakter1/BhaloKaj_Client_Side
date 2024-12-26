@@ -1,227 +1,231 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { authContext } from "../../AuthProvider/AuthProvider";
-import { useLocation } from "react-router-dom";
-import { compareAsc } from 'date-fns'
+import { useLocation, useNavigate } from "react-router-dom";
+import { format } from 'date-fns';
 import { toast } from "react-toastify";
 import axios from "axios";
-
+import bgImg from "../../assets/pexels-shvetsa-5029855.jpg";
+import Swal from "sweetalert2";
 
 const BeAVolunteer = () => {
     const { user } = useContext(authContext);
     const location = useLocation();
+    const navigate = useNavigate();
     const post = location.state?.post;
-    // const [status] = useState("requested");
-
-
+    const { _id, thumbnail, description, title, category, deadline, location: orgnizerLocation, volunteersNeeded, organizer } = post || {};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const suggestion = form.suggestion.value;
-        const postId = post._id;
+        const postId = _id;
+        const status = form.status.value;
 
-        // Check if the number of volunteers needed is less than or equal to 0
         if (post.volunteersNeeded <= 0) {
-            return alert('No more volunteers needed for this post.');
+            return toast.warning('No more volunteers needed for this post.');
         }
 
         const requestData = {
+            thumbnail,
+            description,
+            title,
+            category,
+            deadline,
+            location: orgnizerLocation,
+            volunteersNeeded,
+            organizer,
             postId,
             suggestion,
-            status: 'requested',
+            status,
             volunteerEmail: user?.email,
             volunteerName: user?.displayName,
         };
 
-        console.log(requestData);
-
         try {
-            // Make POST request to the backend
             const { data } = await axios.post(`http://localhost:5000/volunteer-request`, requestData);
-
-            // Reset the form after successful request
             form.reset();
-
-            // Show success toast
-            toast.success('Request Successful!');
-            console.log(data);
-
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your request has been sent",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            navigate('/volunteer-requests');
         } catch (err) {
             console.error(err);
-
-            // If the error has a response, use the error message from the server
             const errorMessage = err?.response?.data || 'An error occurred. Please try again.';
-
-            // Show error toast
             toast.error(errorMessage);
         }
     };
 
-
     return (
-        <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-semibold text-center mb-6">Volunteer Request Form</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Thumbnail</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={post.thumbnail}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
+        <div className="min-h-screen bg-cover bg-center relative" style={{ backgroundImage: `url(${bgImg})` }}>
+            <div className="absolute inset-0 bg-black opacity-60"></div>
+            <div className="py-10 relative z-10">
+                <div className="max-w-3xl mx-auto p-8 dark:bg-black dark:bg-opacity-25 bg-white bg-opacity-60 shadow-lg rounded-lg">
+                    <h2 className="text-2xl font-semibold text-center mb-6 text-gray-700 dark:text-gray-200">Volunteer Request Form</h2>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Thumbnail</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={thumbnail}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Post Title</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={title}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Description</span>
+                            </label>
+                            <textarea
+                                value={description}
+                                readOnly
+                                className="textarea textarea-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Category</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={category}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Location</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={orgnizerLocation}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Number of Volunteers Needed</span>
+                            </label>
+                            <input
+                                type="number"
+                                value={volunteersNeeded}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Deadline</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={format(new Date(deadline), 'P')}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Organizer Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={organizer?.name}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Organizer Email</span>
+                            </label>
+                            <input
+                                type="email"
+                                value={organizer?.email}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Volunteer Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                value={user?.displayName}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Volunteer Email</span>
+                            </label>
+                            <input
+                                type="email"
+                                value={user?.email}
+                                readOnly
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control mb-4">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Status</span>
+                            </label>
+                            <input
+                                type="text"
+                                value="requested"
+                                name="status"
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text dark:text-white">Suggestion</span>
+                            </label>
+                            <textarea
+                                placeholder="Your suggestion..."
+                                name="suggestion"
+                                className="textarea textarea-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="form-control">
+                            <button className="btn border-none bg-[#553739] hover:bg-[#955E42] text-white w-full">Request</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Post Title</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={post.title}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Description</span>
-                    </label>
-                    <textarea
-                        value={post.description}
-                        readOnly
-                        className="textarea textarea-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Category</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={post.category}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Location</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={post.location}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Number of Volunteers Needed</span>
-                    </label>
-                    <input
-                        type="number"
-                        value={post.volunteersNeeded}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Deadline</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={new Date(post.deadline).toLocaleDateString()}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Organizer Name</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={post.organizerName}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Organizer Email</span>
-                    </label>
-                    <input
-                        type="email"
-                        value={post.organizerEmail}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Volunteer Name</span>
-                    </label>
-                    <input
-                        type="text"
-                        value={user?.displayName}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Volunteer Email</span>
-                    </label>
-                    <input
-                        type="email"
-                        value={user?.email}
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div>
-
-                {/* <div className="form-control mb-4">
-                    <label className="label">Status</label>
-                    <input
-                        type="text"
-                        value={status}
-                        name="statuss"
-                        readOnly
-                        className="input input-bordered w-full"
-                    />
-                </div> */}
-
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Suggestion</span>
-                    </label>
-                    <textarea
-                        placeholder="Your suggestion..."
-                        name="suggestion"
-                        className="textarea textarea-bordered w-full"
-                    />
-                </div>
-
-
-
-                <div className="form-control">
-                    <button className="btn btn-primary w-full">Request</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };
