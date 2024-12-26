@@ -37,7 +37,7 @@ const Navbar = () => {
                 {isDropdownOpen && (
                     <ul
                         tabIndex={1}
-                        className="absolute menu menu-sm dropdown-content bg-base-100 dark:bg-slate-800 rounded-box z-[1] mt-3 w-52 p-2 shadow font-Open_Sans font-medium"
+                        className="absolute menu menu-sm dropdown-content bg-base-100 dark:bg-slate-800 rounded-box z-10 mt-3 w-52 p-2 shadow font-Open_Sans font-medium"
                     >
                         <li>
                             <NavLink
