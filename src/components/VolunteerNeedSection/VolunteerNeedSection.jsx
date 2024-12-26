@@ -8,7 +8,7 @@ const VolunteerNeedSection = ({ posts }) => {
     console.log(posts);
 
     return (
-        <div className='py-40 bg-gray-100 dark:bg-slate-800'>
+        <div className='py-10 md:py-20 lg:py-40 bg-gray-100 dark:bg-slate-800'>
             <div className='w-11/12 md:w-10/12 mx-auto '>
                 <div className='text-center'>
                     <h1 className='text-4xl text-black dark:text-white font-bold font-Exo mb-6'>Current Volunteer Opportunities</h1>
