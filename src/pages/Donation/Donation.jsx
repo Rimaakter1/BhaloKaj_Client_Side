@@ -50,7 +50,7 @@ const Donation = () => {
                                     className="bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 transition-all"
                                     onClick={() => setDonationAmount(amount)}
                                 >
-                                    ${amount}
+                                    TK{amount}
                                 </button>
                             ))}
                         </div>
