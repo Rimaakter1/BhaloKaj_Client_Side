@@ -12,7 +12,7 @@ const VolunteerNeedSection = ({ posts }) => {
                     <h1 className='text-4xl text-black dark:text-white font-bold font-Exo mb-6'>Current Volunteer Opportunities</h1>
                     <p className='text-black mb-10 font-Open_Sans dark:text-white'>There are numerous opportunities to volunteer and support communities in need. Browse through the current volunteer posts and select the ones that best match your skills, interests, and availability. Whether you can give an hour a week or dedicate more time, your contribution makes a significant impact.</p>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                     {
                         posts.map(post => <VolunteerPostCard key={post._id} post={post}></VolunteerPostCard>)
                     }

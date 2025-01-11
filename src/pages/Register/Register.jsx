@@ -53,14 +53,14 @@ const Register = () => {
 
 
     return (
-        <div className='bg-gray-200 dark:bg-slate-800 p-2'>
+        <div className='bg-gray-200 dark:bg-slate-800 p-2 pb-12'>
             <Helmet>
                 <title>BhaloKaj | Registration Page </title>
             </Helmet>
             <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 mx-auto  pt-0 lg:pt-10">
                 <div className="md:w-1/2 w-full lg:h-screen p-8 bg-white dark:bg-opacity-35 rounded-l-lg shadow-md">
                     <h2 className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200 font-Exo">Registration</h2>
-                    <form onSubmit={handleSubmit} className="lg:space-y-3">
+                    <form onSubmit={handleSubmit} className="lg:space-y-2">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text dark:text-white text-lg font-bold font-Exo">Name</span>

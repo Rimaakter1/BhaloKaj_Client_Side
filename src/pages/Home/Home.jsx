@@ -5,6 +5,7 @@ import BannerSection from '../../components/BannerSection/BannerSection';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import FAQ from '../../components/FAQ/FAQ';
 import { Helmet } from 'react-helmet';
+import VolunteerGroup from '../../components/VolunteerGroup/VolunteerGroup';
 
 const Home = () => {
 
@@ -28,7 +29,7 @@ const Home = () => {
             <AboutUs></AboutUs>
             <VolunteerNeedSection posts={posts}></VolunteerNeedSection>
             <FAQ></FAQ>
-
+            <VolunteerGroup></VolunteerGroup>
         </div>
     );
 };

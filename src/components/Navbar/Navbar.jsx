@@ -25,42 +25,69 @@ const Navbar = () => {
 
     const links = (
         <>
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4')}>Home</NavLink>
-            <NavLink to="/volunteer-posts" className={({ isActive }) => (isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4')}>All Volunteer Need Posts</NavLink>
-            <div className="relative">
-                <button
-                    onClick={toggleDropdown}
-                    className={`dark:text-white px-4 ${isProfileActive ? 'text-red-400 font-bold' : ''}`}
-                >
-                    My Profile
-                </button>
-                {isDropdownOpen && (
-                    <ul
-                        tabIndex={1}
-                        className="absolute menu menu-sm dropdown-content bg-base-100 dark:bg-slate-800 rounded-box z-10 mt-3 w-52 p-2 shadow font-Open_Sans font-medium"
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4'
+                }
+            >
+                Home
+            </NavLink>
+            <NavLink
+                to="/volunteer-posts"
+                className={({ isActive }) =>
+                    isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4'
+                }
+            >
+                All Volunteer Need Posts
+            </NavLink>
+            <NavLink
+                to="/statistics"
+                className={({ isActive }) =>
+                    isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4'
+                }
+            >
+                Statistics
+            </NavLink>
+            {
+                user && <div className="relative">
+                    <button
+                        onClick={toggleDropdown}
+                        className={`dark:text-white px-4 ${isProfileActive ? 'text-red-400 font-bold' : ''}`}
                     >
-                        <li>
-                            <NavLink
-                                to="/add-volunteer"
-                                onClick={closeDropdown}
-                                className={({ isActive }) => (isActive ? 'text-red-400 font-bold' : 'dark:text-white')}
-                            >
-                                Add Volunteer Need Post
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/manage-posts"
-                                onClick={closeDropdown}
-                                className={({ isActive }) => (isActive ? 'text-red-400 font-bold' : 'dark:text-white')}
-                            >
-                                Manage My Posts
-                            </NavLink>
-                        </li>
-
-                    </ul>
-                )}
-            </div>
+                        My Profile
+                    </button>
+                    {isDropdownOpen && (
+                        <ul
+                            tabIndex={1}
+                            className="absolute menu menu-sm dropdown-content bg-base-100 dark:bg-slate-800 rounded-box z-10 mt-3 w-52 p-2 shadow font-Open_Sans font-medium"
+                        >
+                            <li>
+                                <NavLink
+                                    to="/add-volunteer"
+                                    onClick={closeDropdown}
+                                    className={({ isActive }) =>
+                                        isActive ? 'text-red-400 font-bold' : 'dark:text-white'
+                                    }
+                                >
+                                    Add Volunteer Need Post
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/manage-posts"
+                                    onClick={closeDropdown}
+                                    className={({ isActive }) =>
+                                        isActive ? 'text-red-400 font-bold' : 'dark:text-white'
+                                    }
+                                >
+                                    Manage My Posts
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
+                </div>
+            }
         </>
     );
 
@@ -71,7 +98,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="py-2 bg-base-100 dark:bg-slate-950">
+        <div className="py-2 bg-base-100 dark:bg-slate-950 sticky top-0 z-50 shadow-md">
             <div className="lg:navbar lg:w-10/12 mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown flex">

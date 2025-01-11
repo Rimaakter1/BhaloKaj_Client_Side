@@ -31,11 +31,11 @@ const BannerSection = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide className="relative w-full h-screen">
-                    <img className="w-full h-screen object-cover" src={slider1} alt="" />
+                <SwiperSlide className="relative w-full" style={{ height: '70vh' }}> {/* Adjusting height */}
+                    <img className="w-full h-full object-cover" src={slider1} alt="" />
                     <div className="absolute inset-0 bg-black opacity-60"></div>
                     <div className="absolute top-1/2 transform -translate-y-1/2 text-white text-center left-6 right-6 md:left-1/2 md:-translate-x-1/2 px-4 md:px-8">
-                        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-Exo mb-4">
                             Join Hands for a <span className="text-orange-600">Better Future</span>
                         </h2>
                         <p className=" md:text-lg lg:text-xl font-Open_Sans mb-6">
@@ -50,11 +50,11 @@ const BannerSection = () => {
                     </div>
                 </SwiperSlide>
 
-                <SwiperSlide className="relative w-full h-screen">
-                    <img className="w-full h-screen object-cover" src={slider2} alt="" />
+                <SwiperSlide className="relative w-full" style={{ height: '70vh' }}>
+                    <img className="w-full h-full object-cover" src={slider2} alt="" />
                     <div className="absolute inset-0 bg-black opacity-60"></div>
                     <div className="absolute top-1/2 transform -translate-y-1/2 text-white text-center left-6 right-6 md:left-1/2 md:-translate-x-1/2 px-4 md:px-8">
-                        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-Exo mb-4">
                             Give Time, Change <span className="text-orange-600">Lives</span>
                         </h2>
                         <p className=" md:text-lg lg:text-xl font-Open_Sans mb-6">
@@ -69,11 +69,11 @@ const BannerSection = () => {
                     </div>
                 </SwiperSlide>
 
-                <SwiperSlide className="relative w-full h-screen">
-                    <img className="w-full h-screen object-cover" src={slider3} alt="" />
+                <SwiperSlide className="relative w-full" style={{ height: '70vh' }}>
+                    <img className="w-full h-full object-cover" src={slider3} alt="" />
                     <div className="absolute inset-0 bg-black opacity-70"></div>
                     <div className="absolute top-1/2 transform -translate-y-1/2 text-white text-center left-6 right-6 md:left-1/2 md:-translate-x-1/2 px-4 md:px-8">
-                        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-Exo mb-4">
                             Be the Change You <span className="text-orange-600">Want to See</span>
                         </h2>
                         <p className="md:text-lg lg:text-xl font-Open_Sans mb-6">
@@ -88,11 +88,11 @@ const BannerSection = () => {
                     </div>
                 </SwiperSlide>
 
-                <SwiperSlide className="relative w-full h-screen">
-                    <img className="w-full h-screen object-cover" src={slider4} alt="" />
+                <SwiperSlide className="relative w-full" style={{ height: '70vh' }}>
+                    <img className="w-full h-full object-cover" src={slider4} alt="" />
                     <div className="absolute inset-0 bg-black opacity-70"></div>
                     <div className="absolute top-1/2 transform -translate-y-1/2 text-white text-center left-6 right-6 md:left-1/2 md:-translate-x-1/2 px-4 md:px-8">
-                        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold font-Exo mb-4">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-Exo mb-4">
                             Volunteer Today, <span className="text-orange-600">Impact Tomorrow</span>
                         </h2>
                         <p className="md:text-lg lg:text-xl font-Open_Sans mb-6">
