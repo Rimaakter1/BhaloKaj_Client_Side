@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import volunteer1 from '../../assets/team-1.jpg';
 import volunteer2 from '../../assets/team-2.jpg';
 import volunteer3 from '../../assets/team-3.jpg';

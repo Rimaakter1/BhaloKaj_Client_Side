@@ -49,6 +49,14 @@ const Navbar = () => {
             >
                 Statistics
             </NavLink>
+            <NavLink
+                to="/donation"
+                className={({ isActive }) =>
+                    isActive ? 'text-red-400 font-bold px-4' : 'dark:text-white px-4'
+                }
+            >
+                Donation
+            </NavLink>
             {
                 user && <div className="relative">
                     <button

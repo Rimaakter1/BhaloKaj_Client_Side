@@ -11,9 +11,8 @@ import BeAVolunteer from "../pages/BeAVolunteer/BeAVolunteer";
 import ManageMyPosts from "../pages/ManageMyPosts/ManageMyPosts";
 import UpdatePosts from "../pages/UpdatePost/UpdatePost";
 import Page404 from "../pages/Page404";
-import Feedback from "../components/Feedback/Feedback";
-import VolunteerTestimonials from "../pages/VolunteerTestimonials/VolunteerTestimonials";
 import Statistics from "../pages/Statistics/Statistics";
+import Donation from "../pages/Donation/Donation";
 
 
 const router = createBrowserRouter([
@@ -62,12 +61,12 @@ const router = createBrowserRouter([
                 element: <PrivateRoute> <UpdatePosts></UpdatePosts> </PrivateRoute>,
             },
             {
-                path: "volunteer-testimonials",
-                element: <VolunteerTestimonials></VolunteerTestimonials>,
-            },
-            {
                 path: 'statistics',
                 element: <Statistics></Statistics>
+            },
+            {
+                path: 'donation',
+                element: <Donation></Donation>
             }
 
 
