@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png"
 import { FaFacebook, FaYoutube } from 'react-icons/fa';
 import { AiFillInstagram, AiFillTwitterCircle, AiFillTwitterSquare } from 'react-icons/ai';
 import { FaSquareFacebook } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -16,10 +17,9 @@ const Footer = () => {
                 </aside>
                 <nav className='flex flex-col dark:text-white space-y-3'>
                     <h6 className="footer-title">Quick Links</h6>
-                    <a className="link link-hover">Homepage</a>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Our Serve</a>
-                    <a className="link link-hover">Contact Us</a>
+                    <Link to="/" className="link link-hover">Home</Link>
+                    <Link to="/statistics" className="link link-hover">Statistics</Link>
+                    <Link to="/donation" className="link link-hover">Donation</Link>
                 </nav>
                 <nav className='flex flex-col dark:text-white space-y-3 mt-5 lg:mt-5'>
                     <h6 className="footer-title">Legal</h6>
