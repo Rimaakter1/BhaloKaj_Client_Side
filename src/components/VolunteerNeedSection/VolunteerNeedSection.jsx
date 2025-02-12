@@ -48,7 +48,7 @@ const VolunteerNeedSection = () => {
                         </div>
 
                         <div className='text-center mt-8'>
-                            <Link className='btn text-xl bg-[#955E42] text-white border-none' to="/volunteer-posts">
+                            <Link className='btn text-xl bg-[#955E42] hover:bg-[#553739] text-white border-none' to="/volunteer-posts">
                                 See All
                             </Link>
                         </div>
