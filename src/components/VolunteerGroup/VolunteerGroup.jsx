@@ -29,9 +29,6 @@ const VolunteerGroup = () => {
                             <p className="text-gray-600 mb-4">
                                 John has been with us for over 3 years. He loves organizing community events and helping young people get involved.
                             </p>
-                            <button className="bg-[#553739] text-white p-2 rounded-lg  font-bold">
-                                View Profile
-                            </button>
                         </div>
                     </div>
 
@@ -47,9 +44,6 @@ const VolunteerGroup = () => {
                             <p className="text-gray-600 mb-4">
                                 Jane is passionate about environmental conservation and leads our beach cleanup initiatives.
                             </p>
-                            <button className="bg-[#553739] text-white p-2 rounded-lg  font-bold">
-                                View Profile
-                            </button>
                         </p>
                     </div>
 
@@ -64,9 +58,6 @@ const VolunteerGroup = () => {
                             <p className="text-gray-600 mb-4">
                                 Mark has been an integral part of our fundraising team, raising awareness and funds for several causes.
                             </p>
-                            <button className="bg-[#553739] text-white p-2 rounded-lg  font-bold">
-                                View Profile
-                            </button>
                         </div>
                     </div>
 
@@ -81,9 +72,6 @@ const VolunteerGroup = () => {
                             <p className="text-gray-600 mb-4">
                                 Emily organizes community outreach programs to ensure everyone has the opportunity to volunteer.
                             </p>
-                            <button className="bg-[#553739] text-white p-2 rounded-lg  font-bold">
-                                View Profile
-                            </button>
                         </div>
                     </div>
 
