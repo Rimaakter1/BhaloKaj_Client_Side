@@ -43,7 +43,7 @@ const AboutUs = () => {
                         </div>
                     </div>
 
-                    <button className='px-10 py-3 bg-[#553739] hover:bg-[#955E42] rounded-full text-white text-lg mt-4 border-none'>Learn More</button>
+
                 </div>
             </div>
         </div>
