@@ -17,7 +17,7 @@ const VolunteerGroup = () => {
             </div>
 
             <div className="px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div className="hover:border hover:border-[#553739] hover:border-dashed bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                         <img
                             src={volunteer1}
